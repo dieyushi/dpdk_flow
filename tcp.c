@@ -70,6 +70,7 @@ void tcp_check(struct ip *iph, struct tcphdr *tcph)
 				&& iph->ip_dst.s_addr == obj->ip_des && tcph->dest == obj->tcp_des
 				&& obj->next_seq == ntohl(tcph->seq)){
 			obj->next_seq = ntohl(tcph->seq) + payload_len;
+			obj->last_sec = time(NULL);
 			if(obj->num >= SAVE_NUM)
 				break;
 			obj->pkt[obj->num].len = (unsigned short)payload_len;

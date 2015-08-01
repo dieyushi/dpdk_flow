@@ -70,6 +70,7 @@ void udp_check(struct ip *iph, struct udphdr *udph)
 		if(iph->ip_src.s_addr == obj->ip_src && udph->source == obj->udp_src
 				&& iph->ip_dst.s_addr == obj->ip_des && udph->dest == obj->udp_des) {
 			found = 1;
+			obj->last_sec = time(NULL);
 			if(obj->num >= SAVE_NUM)
 				break;
 			obj->pkt[obj->num].len = (unsigned short)payload_len;
